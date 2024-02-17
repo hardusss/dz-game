@@ -1,28 +1,53 @@
 from tkinter import *
+from time import sleep
 
+text_colors = ['green', 'red', 'blue', 'purple', 'yellow',
+               'lime', 'orange', 'gold', 'silver', 'teal',
+               'brown', 'pink', 'turquoise']
 root = Tk()
-click = 1
-root.geometry('200x200')
+click = 0
+stop = 0
+root.geometry('300x190')
 root.resizable(width=False, height=False)
-root['bg'] = 'black'
-root.title(str(click))
+root['bg'] = 'white'
+root.title(f'Кліки = {str(click)}')
+root.attributes('-alpha', 0.7)
 
 
 def clickOnBtn():
-    global click
+    global click, stop
     if click % 2 == 0:
-        click += 1
-        btn_click.config(text='Клікни', bg='blue', activebackground='yellow', font=(None, 10, 'bold'), fg='white')
-        root.update()
+        while stop != len(text_colors):
+            for i in text_colors:
+                label.config(text='Button', fg=i)
+                root.update()
+                stop+=1
+                sleep(0.05)
     else:
-        btn_click.config(text='Ти клікнув', bg='red', activebackground='lime', font=(None, 10, 'bold'), fg='white')
-        click += 1
+        while stop != len(text_colors):
+            for i in text_colors:
+                label.config(text='Кнопка', fg=i)
+                root.update()
+                stop+=1
+                sleep(0.05)
+    click += 1
+    root.title(f'Кліки = {click}')
+    stop = 0
+    label.config(fg='black')
+
+label = Label(text='Кнопка', fg='black', font=(None, '15', 'bold'), bg='white')
+btn_click = Button(text='Клікни', bg='black', activebackground='yellow', command=clickOnBtn, font=(None, 10, 'bold'), fg='white')
+btn_click.place(x=125, y=80)
+label.place(x=117, y=30)
+pls = Label(text='Між кожним натисканням на кнопку'
+                 '\nтрішки зачикайте',fg='black',
+                 font=('Comic Sans MS', 12, 'bold'),
+                 bg='white')
+pls.place(y=120, x=5)
+while True:
+    for i in text_colors:
+        btn_click.config(fg=i)
         root.update()
-    root.title(str(click))
-    root.update()
-
-
-btn_click = Button(text='Клікни', bg='blue', activebackground='yellow', command=clickOnBtn, font=(None, 10, 'bold'), fg='white')
-btn_click.place(x=75, y=80)
+        sleep(0.05)
 
 root.mainloop()
