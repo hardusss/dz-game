@@ -3,7 +3,7 @@ from tkinter import *
 from random import randint
 from time import sleep
 
-sproba = 5
+spr0ba = 5
 
 
 def game(randNum):
