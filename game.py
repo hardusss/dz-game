@@ -2,8 +2,9 @@ import _tkinter
 from tkinter import *
 from random import randint
 from time import sleep
+from tkinter import messagebox
 
-spr0ba = 5
+sproba = 5
 
 
 def game(randNum):
@@ -13,6 +14,14 @@ def game(randNum):
     root.geometry('300x220')
     root.title(f'Залишилось спроб {sproba}')
     root['bg'] = 'MediumPurple4'
+    w = root.winfo_screenwidth()
+    h = root.winfo_screenheight()
+    h = h / 2
+    w = w / 2
+    w = w - (w / 4)
+    h = h - (h / 3)
+
+    root.geometry(f'300x220+{int(w)}+{int(h)}')
 
     def restart():
         global sproba
@@ -21,14 +30,17 @@ def game(randNum):
         main()
 
     def exit():
-        root.destroy()
+        exitForMassegeBox = messagebox.askyesnocancel('Вихід', 'Бажате покинути програму')
+        if exitForMassegeBox:
+            if exitForMassegeBox is not None:
+                root.destroy()
 
     def valid(value):
         if len(value) <= 3:
-            labelInfo.config(text='Задай діапазон числа')
+            labelResult.config(text='Результат', fg='white')
             return True
         else:
-            labelInfo.config(text='Максимальна довжина 3')
+            labelResult.config(text='Максимальна довжина 3', fg='red')
             return False
 
     def res(numRes):
@@ -92,7 +104,14 @@ def main():
     root.geometry('260x220')
     root.title('Відгадай число')
     root['bg'] = 'MediumPurple4'
+    w = root.winfo_screenwidth()
+    h = root.winfo_screenheight()
+    h = h / 2
+    w = w / 2
+    w = w - (w / 4)
+    h = h - (h / 3)
 
+    root.geometry(f'260x220+{int(w)}+{int(h)}')
     gameNumber = ''
     diapazon = []
 
